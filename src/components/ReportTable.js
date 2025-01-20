@@ -11,6 +11,8 @@ const ReportTable = () => {
   const [endDate, setEndDate] = useState(null);
   const [systemNameFilter, setSystemNameFilter] = useState("");
   const [userNameFilter, setUserNameFilter] = useState("");
+  const [browserNameFilter, setBrowserNameFilter] = useState(""); // Added browser filter
+  const [timeSpentFilter, setTimeSpentFilter] = useState(""); // Added time spent filter
   const [sortDirection, setSortDirection] = useState("asc");  // Track sort direction
 
   useEffect(() => {
@@ -52,6 +54,33 @@ const ReportTable = () => {
       );
     }
 
+    // Filter by browser name
+    if (browserNameFilter) {
+      filtered = filtered.filter((report) =>
+        report.users.some((user) =>
+          user.browsers.some((browser) =>
+            browser.browserName.toLowerCase().includes(browserNameFilter.toLowerCase())
+          )
+        )
+      );
+    }
+
+    // Filter by time spent (minutes)
+    if (timeSpentFilter) {
+      const timeSpent = parseInt(timeSpentFilter, 10);  // Parse the timeSpentFilter as an integer
+
+      filtered = filtered.filter((report) =>
+        report.users.some((user) =>
+          user.browsers.some((browser) =>
+            browser.visitedSites.some((site) =>
+              // Ensure both sides of the comparison are treated as numbers
+              site.totalTimeSpentInMinutes >= timeSpent
+            )
+          )
+        )
+      );
+    }
+
     // Date Filter Logic
     filtered = filtered.filter((report) => {
       const reportDate = parseDate(report.date); // Parse report date to Date object
@@ -67,7 +96,7 @@ const ReportTable = () => {
       return true; // No date filter applied
     });
 
-    // Filter by total time spent (minutes)
+    // Filter by total time spent (minutes) for valid sites (only sites where timeSpent > 0)
     filtered = filtered.map((report) => {
       report.users.forEach((user) => {
         user.browsers.forEach((browser) => {
@@ -129,9 +158,26 @@ const ReportTable = () => {
           onChange={(e) => setUserNameFilter(e.target.value)}
         />
 
-        {/* Date Filter */}
+        {/* Browser Name Filter */}
+        <input
+          className="filter-input"
+          type="text"
+          placeholder="Filter by Browser Name"
+          value={browserNameFilter}
+          onChange={(e) => setBrowserNameFilter(e.target.value)}
+        />
+
+        {/* Time Spent Filter */}
+        <input
+          className="filter-input"
+          type="number"
+          placeholder="Filter by Time Spent (Minutes)"
+          value={timeSpentFilter}
+          onChange={(e) => setTimeSpentFilter(e.target.value)}
+        />
+
+        {/* Date Filters (in the input field, no labels) */}
         <div className="date-filter-container">
-          <label>Start Date:</label>
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
@@ -140,7 +186,6 @@ const ReportTable = () => {
           />
         </div>
         <div className="date-filter-container">
-          <label>End Date:</label>
           <DatePicker
             selected={endDate}
             onChange={(date) => setEndDate(date)}
