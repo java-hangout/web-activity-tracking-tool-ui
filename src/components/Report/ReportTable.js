@@ -83,6 +83,50 @@ const ReportTable = () => {
     setCurrentPage(1); // Reset to the first page when a filter is applied
   };
 
+  // CSV generation logic
+  const generateCSV = (data) => {
+    const flattenedData = [];
+    data.forEach((report) => {
+      report.users.forEach((user) => {
+        user.browsers.forEach((browser) => {
+          browser.visitedSites.forEach((site) => {
+            flattenedData.push({
+              Date: report.date,
+              SystemName: report.systemName,
+              UserName: user.userName,
+              Browser: browser.browserName,
+              SiteTitle: site.title,
+              TotalTimeSpentInMinutes: site.totalTimeSpentInMinutes,
+            });
+          });
+        });
+      });
+    });
+
+    const headers = [
+      "Date",
+      "SystemName",
+      "UserName",
+      "Browser",
+      "SiteTitle",
+      "TotalTimeSpentInMinutes",
+    ];
+
+    const rows = flattenedData.map((row) =>
+      headers.map((header) => row[header] || "").join(",")
+    );
+
+    // Combine headers and rows into one CSV string
+    const csvContent = [headers.join(","), ...rows].join("\n");
+
+    // Create a downloadable link
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "report.csv";
+    link.click();
+  };
+
   // Pagination logic: slice data based on the current page
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -232,8 +276,8 @@ const ReportTable = () => {
           />
         </div>
         <button className="filter-button" onClick={handleFilter}>Apply Filters</button>
+        <button className="download-button" onClick={() => generateCSV(filteredReports)}>Download CSV</button>
       </div>
-
       <div className="table-container">
         <table className="activity-table">
           <thead>

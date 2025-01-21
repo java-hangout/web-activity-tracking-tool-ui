@@ -23,6 +23,7 @@
 
 .filter-input,
 .date-picker,
+.download-button,
 .filter-button {
   padding: 10px;
   margin: 5px;
@@ -122,6 +123,7 @@
 
   .filter-input,
   .date-picker,
+  .download-button,
   .filter-button {
     width: 100%;
     margin-bottom: 10px;
@@ -132,4 +134,27 @@
     font-size: 14px;
     padding: 8px;
   }
+}
+/* .download-button {
+  padding: 10px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.download-button:hover {
+  background-color: #45a049;
+} */
+.download-button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #45a049;
 }
