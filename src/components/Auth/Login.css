@@ -1,0 +1,74 @@
+/* Centering the page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+}
+
+/* Styling the form */
+.login-form {
+    width: 400px; /* Increased width */
+    padding: 30px; /* Increased padding for a bigger form */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for a bold look */
+    text-align: center;
+}
+
+/* Header styling */
+.login-header {
+    font-size: 2rem; /* Larger font size */
+    margin-bottom: 25px; /* Increased spacing below the header */
+    color: #333;
+}
+
+/* Input field styling */
+.input-group {
+    margin-bottom: 20px; /* Increased spacing between fields */
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px; /* Larger padding for bigger input fields */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1.1rem; /* Larger font size */
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 1rem; /* Bigger font size for errors */
+    margin-bottom: 20px;
+}
+
+/* Login button styling */
+.login-button {
+    width: 100%;
+    padding: 12px; /* Larger button */
+    font-size: 1.2rem; /* Larger text size for the button */
+    border: none;
+    border-radius: 6px;
+    background-color: #87ceeb; /* Light blue */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #5dade2; /* Slightly darker blue */
+}
+
+/* Optional: Adjust for smaller screens */
+@media (max-width: 500px) {
+    .login-form {
+        width: 90%; /* Make form fit smaller screens */
+    }
+
+    .login-header {
+        font-size: 1.8rem; /* Slightly reduce font size for smaller screens */
+    }
+}

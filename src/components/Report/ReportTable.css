@@ -1,0 +1,135 @@
+/* General Container */
+.report-table-container {
+  font-family: 'Arial', sans-serif;
+  margin: 20px;
+  padding: 20px;
+}
+
+/* Title */
+.report-table-container h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Filter Section */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.filter-input,
+.date-picker,
+.filter-button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.filter-input,
+.date-picker {
+  width: 200px;
+}
+
+.filter-button {
+  padding: 10px 15px;
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #357ABD;
+}
+
+/* Table Styling */
+.activity-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-table th,
+.activity-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.activity-table th {
+  background-color: #4A90E2;
+  color: white;
+}
+
+.activity-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.activity-table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.sortable-column {
+  cursor: pointer;
+}
+
+/* Pagination Section */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-button:disabled {
+  background-color: #ddd;
+}
+
+.pagination-button:hover {
+  background-color: #357ABD;
+}
+
+.pagination-info {
+  align-self: center;
+  color: #4A90E2;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-input,
+  .date-picker,
+  .filter-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .activity-table th,
+  .activity-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
